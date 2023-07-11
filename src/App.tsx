@@ -1,9 +1,9 @@
+import { Button } from "./components/ui/Button";
+
 const App = () => {
     return (
         <>
-            <p className="text-red-500">
-                Click on the Vite and React logos to learn more
-            </p>
+            <Button>Hello</Button>
         </>
     );
 };

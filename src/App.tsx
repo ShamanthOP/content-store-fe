@@ -9,6 +9,7 @@ import {
 import { Route, Routes, useNavigate } from "react-router-dom";
 import AuthLayout from "./components/layout/AuthLayout";
 import SetupPage from "./components/SetupPage";
+import RootLayout from "./components/layout/RootLayout";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
@@ -36,19 +37,21 @@ const App = () => {
                         element={<SignUp routing="path" path="/sign-up" />}
                     />
                 </Route>
-                <Route
-                    path="/"
-                    element={
-                        <>
-                            <SignedIn>
-                                <SetupPage />
-                            </SignedIn>
-                            <SignedOut>
-                                <RedirectToSignIn />
-                            </SignedOut>
-                        </>
-                    }
-                />
+                <Route element={<RootLayout />}>
+                    <Route
+                        path="/"
+                        element={
+                            <>
+                                <SignedIn>
+                                    <SetupPage />
+                                </SignedIn>
+                                <SignedOut>
+                                    <RedirectToSignIn />
+                                </SignedOut>
+                            </>
+                        }
+                    />
+                </Route>
             </Routes>
         </ClerkProvider>
     );

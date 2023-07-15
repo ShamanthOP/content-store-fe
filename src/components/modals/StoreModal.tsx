@@ -14,9 +14,9 @@ import {
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import axios from "axios";
-import { useAuth } from "@clerk/clerk-react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useUser } from "../../hooks/useUser";
 
 const formValidator = z.object({
     name: z.string().min(1),
@@ -25,7 +25,7 @@ const formValidator = z.object({
 type FormPayload = z.infer<typeof formValidator>;
 
 const StoreModal = () => {
-    const { getToken } = useAuth();
+    const { token } = useUser();
     const storeModal = useStoreModal();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,6 @@ const StoreModal = () => {
     });
 
     const onSubmit = async (values: FormPayload) => {
-        const token = (await getToken()) ?? "";
         setIsLoading(true);
         try {
             const res = await axios.post(

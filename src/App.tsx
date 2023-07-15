@@ -37,20 +37,19 @@ const App = () => {
                         element={<SignUp routing="path" path="/sign-up" />}
                     />
                 </Route>
-                <Route element={<RootLayout />}>
-                    <Route
-                        path="/"
-                        element={
-                            <>
-                                <SignedIn>
-                                    <SetupPage />
-                                </SignedIn>
-                                <SignedOut>
-                                    <RedirectToSignIn />
-                                </SignedOut>
-                            </>
-                        }
-                    />
+                <Route
+                    element={
+                        <>
+                            <SignedIn>
+                                <RootLayout />
+                            </SignedIn>
+                            <SignedOut>
+                                <RedirectToSignIn />
+                            </SignedOut>
+                        </>
+                    }
+                >
+                    <Route path="/" element={<SetupPage />} />
                 </Route>
             </Routes>
         </ClerkProvider>

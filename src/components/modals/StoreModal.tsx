@@ -17,6 +17,7 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useUser } from "../../hooks/useUser";
+import { Store } from "../../lib/types";
 
 const formValidator = z.object({
     name: z.string().min(1),
@@ -47,8 +48,8 @@ const StoreModal = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
-            console.log(res.data);
-            toast.success("Store created!");
+            const newStore = res.data as Store;
+            window.location.assign(`/${newStore.id}`);
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong.");

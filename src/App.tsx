@@ -1,18 +1,12 @@
-import {
-    ClerkProvider,
-    RedirectToSignIn,
-    SignIn,
-    SignUp,
-    SignedIn,
-    SignedOut,
-} from "@clerk/clerk-react";
+import { ClerkProvider, SignIn, SignUp } from "@clerk/clerk-react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import DashboardPage from "./components/pages/DashboardPage";
+import SetupPage from "./components/pages/SetupPage";
 import AuthLayout from "./components/layout/AuthLayout";
-import SetupPage from "./components/SetupPage";
+import DashboardLayout from "./components/layout/DashboardLayout";
 import RootLayout from "./components/layout/RootLayout";
 import SetupLayout from "./components/layout/SetupLayout";
-import DashboardLayout from "./components/layout/DashboardLayout";
-import DashboardPage from "./components/DashboardPage";
+import AuthProvider from "./components/providers/AuthProvider";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
@@ -41,23 +35,29 @@ const App = () => {
                     />
                 </Route>
                 <Route
+                    path="/"
                     element={
-                        <>
-                            <SignedIn>
-                                <RootLayout />
-                            </SignedIn>
-                            <SignedOut>
-                                <RedirectToSignIn />
-                            </SignedOut>
-                        </>
+                        <AuthProvider>
+                            <RootLayout />
+                        </AuthProvider>
                     }
                 >
-                    <Route element={<SetupLayout />}>
-                        <Route path="/" element={<SetupPage />}></Route>
-                    </Route>
-                    <Route element={<DashboardLayout />}>
-                        <Route path="/:storeId" element={<DashboardPage />} />
-                    </Route>
+                    <Route
+                        index
+                        element={
+                            <SetupLayout>
+                                <SetupPage />
+                            </SetupLayout>
+                        }
+                    />
+                    <Route
+                        path=":storeId"
+                        element={
+                            <DashboardLayout>
+                                <DashboardPage />
+                            </DashboardLayout>
+                        }
+                    />
                 </Route>
             </Routes>
         </ClerkProvider>

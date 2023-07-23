@@ -1,54 +1,40 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { useUser } from "../../hooks/useUser";
-import { Store } from "../../lib/types";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useStoreModal } from "../../hooks/useStoreModal";
+import Navbar from "../Navbar/Navbar";
+import useStore from "../../hooks/useStore";
 
-const DashboardLayout = () => {
+interface DashboardLayoutProps {
+    children: React.ReactNode;
+}
+
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     const { storeId } = useParams();
     const navigate = useNavigate();
-    const { userId, token } = useUser();
-    const { onClose } = useStoreModal();
+    const { onClose, isOpen } = useStoreModal();
 
-    const [store, setStore] = useState<Store>();
-
-    useEffect(() => {
-        onClose();
-    }, [onClose]);
+    const { data: stores, isLoading } = useStore();
 
     useEffect(() => {
-        const getStoreData = async () => {
-            console.log(storeId);
-            const response = await axios.get(
-                `${
-                    import.meta.env.VITE_REACT_APP_BACKEND_URL as string
-                }/store/${storeId as string}`,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-            console.log("RESPONSE", response.data);
-            const store = response.data as Store;
-            console.log("Dashboard layout", store);
-            if (!store) {
+        console.log("Dashboard layout called");
+        if (isOpen) {
+            onClose();
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isLoading) {
+            const currentStore = stores?.find((store) => store.id === storeId);
+            if (!currentStore) {
                 navigate("/");
             }
-            setStore(store);
-        };
-        void getStoreData();
-    }, [storeId, token, navigate]);
-
-    useEffect(() => {
-        if (!userId) {
-            navigate(`/sign-in`, { replace: true });
         }
-    }, [userId, navigate]);
+    }, [isLoading, navigate, storeId, stores]);
 
     return (
         <>
-            <div>{store?.id} Navbar</div>
-            <Outlet />
+            <Navbar />
+            {children}
         </>
     );
 };

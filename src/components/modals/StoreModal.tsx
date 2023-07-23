@@ -1,8 +1,12 @@
-import { z } from "zod";
-import { useStoreModal } from "../../hooks/useStoreModal";
-import Modal from "../ui/Modal";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { z } from "zod";
+import usePost from "../../hooks/usePost";
+import { useStoreModal } from "../../hooks/useStoreModal";
+import { Store } from "../../lib/types";
+import { Button } from "../ui/Button";
 import {
     Form,
     FormControl,
@@ -12,12 +16,7 @@ import {
     FormMessage,
 } from "../ui/Form";
 import { Input } from "../ui/Input";
-import { Button } from "../ui/Button";
-import axios from "axios";
-import { useState } from "react";
-import { toast } from "react-hot-toast";
-import { useUser } from "../../hooks/useUser";
-import { Store } from "../../lib/types";
+import Modal from "../ui/Modal";
 
 const formValidator = z.object({
     name: z.string().min(1),
@@ -26,8 +25,8 @@ const formValidator = z.object({
 type FormPayload = z.infer<typeof formValidator>;
 
 const StoreModal = () => {
-    const { token } = useUser();
     const storeModal = useStoreModal();
+    const customPost = usePost();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -41,14 +40,7 @@ const StoreModal = () => {
     const onSubmit = async (values: FormPayload) => {
         setIsLoading(true);
         try {
-            const res = await axios.post(
-                `${import.meta.env.VITE_REACT_APP_BACKEND_URL as string}/store`,
-                values,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-            const newStore = res.data as Store;
+            const newStore = (await customPost("/store", values)) as Store;
             window.location.assign(`/${newStore.id}`);
         } catch (error) {
             console.log(error);
@@ -61,7 +53,7 @@ const StoreModal = () => {
     return (
         <Modal
             title="Create store"
-            description="Adda a new store to manage products and categories"
+            description="Add a new store to manage products and categories"
             isOpen={storeModal.isOpen}
             onClose={storeModal.onClose}
         >

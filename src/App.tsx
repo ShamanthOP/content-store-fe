@@ -7,6 +7,7 @@ import DashboardLayout from "./components/layout/DashboardLayout";
 import RootLayout from "./components/layout/RootLayout";
 import SetupLayout from "./components/layout/SetupLayout";
 import AuthProvider from "./components/providers/AuthProvider";
+import SettingsPage from "./components/pages/SettingsPage";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
@@ -50,14 +51,10 @@ const App = () => {
                             </SetupLayout>
                         }
                     />
-                    <Route
-                        path=":storeId"
-                        element={
-                            <DashboardLayout>
-                                <DashboardPage />
-                            </DashboardLayout>
-                        }
-                    />
+                    <Route path=":storeId" element={<DashboardLayout />}>
+                        <Route index element={<DashboardPage />} />
+                        <Route path="settings" element={<SettingsPage />} />
+                    </Route>
                 </Route>
             </Routes>
         </ClerkProvider>

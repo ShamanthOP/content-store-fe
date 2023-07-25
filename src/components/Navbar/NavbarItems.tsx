@@ -14,6 +14,10 @@ const NavbarItems = ({
 
     const routes = [
         {
+            href: `/${params.storeId}`,
+            label: "Dashboard",
+        },
+        {
             href: `/${params.storeId}/settings`,
             label: "Settings",
         },
@@ -39,6 +43,7 @@ const NavbarItems = ({
                                     : "text-muted-foreground"
                             )
                         }
+                        end
                     >
                         {route.label}
                     </NavLink>

@@ -12,7 +12,7 @@ const SetupLayout: React.FC<SetupLayoutProps> = ({ children }) => {
 
     useEffect(() => {
         console.log("Setup layout called");
-        if (!isLoading && stores) {
+        if (!isLoading && stores?.length) {
             navigate(`/${stores[0].id}`);
         }
     }, [isLoading]);

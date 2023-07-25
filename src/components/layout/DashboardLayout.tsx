@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useStoreModal } from "../../hooks/useStoreModal";
 import Navbar from "../Navbar/Navbar";
 import useStore from "../../hooks/useStore";
 
-interface DashboardLayoutProps {
-    children: React.ReactNode;
-}
-
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout = () => {
     const { storeId } = useParams();
     const navigate = useNavigate();
     const { onClose, isOpen } = useStoreModal();
@@ -34,7 +30,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     return (
         <>
             <Navbar />
-            {children}
+            <Outlet />
         </>
     );
 };

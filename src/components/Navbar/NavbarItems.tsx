@@ -18,6 +18,10 @@ const NavbarItems = ({
             label: "Dashboard",
         },
         {
+            href: `/${params.storeId}/billboards`,
+            label: "Billboards",
+        },
+        {
             href: `/${params.storeId}/settings`,
             label: "Settings",
         },

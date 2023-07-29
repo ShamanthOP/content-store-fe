@@ -54,7 +54,7 @@ const BillboardForm: React.FC<BillBoardFormProps> = ({ initialData }) => {
         : "Billboard created";
     const action = initialData ? "Save changes" : "Create";
 
-    const settingsForm = useForm<BillboardFormPayload>({
+    const billboardForm = useForm<BillboardFormPayload>({
         resolver: zodResolver(billboardFormSchema),
         defaultValues: initialData || {
             label: "",
@@ -89,7 +89,7 @@ const BillboardForm: React.FC<BillBoardFormProps> = ({ initialData }) => {
             await customDelete(
                 `/${params.storeId!}/billboards/${params.billboardId!}`
             );
-            ("/");
+            navigate(`/${params.storeId!}/billboards`);
             toast.success("Billboard deleted");
         } catch (error) {
             console.log(error);
@@ -123,13 +123,13 @@ const BillboardForm: React.FC<BillBoardFormProps> = ({ initialData }) => {
                 )}
             </div>
             <Separator />
-            <Form {...settingsForm}>
+            <Form {...billboardForm}>
                 <form
-                    onSubmit={settingsForm.handleSubmit(onSubmit)}
+                    onSubmit={billboardForm.handleSubmit(onSubmit)}
                     className="space-y-8 w-full"
                 >
                     <FormField
-                        control={settingsForm.control}
+                        control={billboardForm.control}
                         name="imageUrl"
                         render={({ field }) => (
                             <FormItem>
@@ -147,7 +147,7 @@ const BillboardForm: React.FC<BillBoardFormProps> = ({ initialData }) => {
                     />
                     <div className="grid grid-cols-3 gap-8">
                         <FormField
-                            control={settingsForm.control}
+                            control={billboardForm.control}
                             name="label"
                             render={({ field }) => (
                                 <FormItem>
@@ -173,7 +173,6 @@ const BillboardForm: React.FC<BillBoardFormProps> = ({ initialData }) => {
                     </Button>
                 </form>
             </Form>
-            <Separator />
         </>
     );
 };

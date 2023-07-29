@@ -21,7 +21,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import usePatch from "../hooks/usePatch";
 import AlertModal from "./modals/AlertModal";
 import useDelete from "../hooks/useDelete";
-import ApiAlert from "./ui/ApiAlert";
+import ApiAlert from "./Api/ApiAlert";
 
 interface SettingsFormProps {
     initialData: Store;
@@ -136,7 +136,9 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
             <Separator />
             <ApiAlert
                 title="PUBLIC_API_URL"
-                description={`${window.location.origin}/api/${params.storeId!}`}
+                description={`${
+                    import.meta.env.VITE_REACT_APP_BACKEND_URL as string
+                }/store/${params.storeId!}`}
                 variant="public"
             />
         </>

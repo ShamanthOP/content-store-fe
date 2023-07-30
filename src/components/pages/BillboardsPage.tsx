@@ -1,7 +1,7 @@
 import useBillboards from "../../hooks/useBillboards";
-import { BillboardCloumn } from "../BillBoards/BillboardColumns";
+import { BillboardColumn } from "../BillBoards/BillboardColumns";
 import BillBoards from "../BillBoards/Billboards";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 
 const BillboardsPage = () => {
     const { data: billboards, isLoading } = useBillboards();
@@ -10,7 +10,7 @@ const BillboardsPage = () => {
         return null;
     }
 
-    const formattedBillboards: BillboardCloumn[] = billboards.map(
+    const formattedBillboards: BillboardColumn[] = billboards.map(
         (billboard) => ({
             id: billboard.id,
             label: billboard.label,

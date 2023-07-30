@@ -4,12 +4,12 @@ import Heading from "../ui/Heading";
 import { Separator } from "../ui/Separator";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { BillboardCloumn, columns } from "./BillboardColumns";
+import { BillboardColumn, columns } from "./BillboardColumns";
 import { DataTable } from "../ui/DataTable";
 import ApiList from "../Api/ApiList";
 
 interface BillBoardsProps {
-    data: BillboardCloumn[];
+    data: BillboardColumn[];
 }
 
 const BillBoards: React.FC<BillBoardsProps> = ({ data }) => {

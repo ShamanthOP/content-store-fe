@@ -10,6 +10,8 @@ import AuthProvider from "./components/providers/AuthProvider";
 import SettingsPage from "./components/pages/SettingsPage";
 import BillboardsPage from "./components/pages/BillboardsPage";
 import BillboardPage from "./components/pages/BillboardPage";
+import CategoriesPage from "./components/pages/CategoriesPage";
+import CategoryPage from "./components/pages/CategoryPage";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
@@ -60,6 +62,11 @@ const App = () => {
                         <Route
                             path="billboards/:billboardId"
                             element={<BillboardPage />}
+                        />
+                        <Route path="categories" element={<CategoriesPage />} />
+                        <Route
+                            path="categories/:categoryId"
+                            element={<CategoryPage />}
                         />
                     </Route>
                 </Route>

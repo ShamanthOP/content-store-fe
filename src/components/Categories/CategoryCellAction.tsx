@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { BillboardColumn } from "./BillboardColumns";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -13,12 +12,13 @@ import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import useDelete from "../../hooks/useDelete";
 import AlertModal from "../modals/AlertModal";
+import { CategoryColumn } from "./CategoryColumns";
 
-interface BillboardCellActionProps {
-    data: BillboardColumn;
+interface CategoryCellActionProps {
+    data: CategoryColumn;
 }
 
-const BillboardCellAction: React.FC<BillboardCellActionProps> = ({ data }) => {
+const CategoryCellAction: React.FC<CategoryCellActionProps> = ({ data }) => {
     const params = useParams();
     const navigate = useNavigate();
     const customDelete = useDelete();
@@ -28,19 +28,19 @@ const BillboardCellAction: React.FC<BillboardCellActionProps> = ({ data }) => {
 
     const onCopy = async (id: string) => {
         await navigator.clipboard.writeText(id);
-        toast.success("Billboard Id copied to the clipboard");
+        toast.success("Category Id copied to the clipboard");
     };
 
     const onDelete = async () => {
         try {
             setIsLoading(true);
-            await customDelete(`/${params.storeId!}/billboards/${data.id}`);
+            await customDelete(`/${params.storeId!}/categories/${data.id}`);
             navigate(0);
-            toast.success("Billboard deleted");
+            toast.success("Category deleted");
         } catch (error) {
             console.log(error);
             toast.error(
-                "Something went wrong. Make sure you removed all categories using this billboard."
+                "Something went wrong. Make sure you removed all products using this category."
             );
         } finally {
             setOpen(false);
@@ -83,4 +83,4 @@ const BillboardCellAction: React.FC<BillboardCellActionProps> = ({ data }) => {
     );
 };
 
-export default BillboardCellAction;
+export default CategoryCellAction;

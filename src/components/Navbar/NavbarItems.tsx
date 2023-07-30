@@ -22,6 +22,10 @@ const NavbarItems = ({
             label: "Billboards",
         },
         {
+            href: `/${params.storeId}/categories`,
+            label: "Categories",
+        },
+        {
             href: `/${params.storeId}/settings`,
             label: "Settings",
         },

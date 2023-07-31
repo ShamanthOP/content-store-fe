@@ -18,8 +18,8 @@ interface UploadWidgetProps {
 }
 
 const UploadWidget: React.FC<UploadWidgetProps> = ({ disabled, onChange }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
-    const [widget, setWidget] = useState(() =>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unused-vars
+    const [widget] = useState(() =>
         window.cloudinary.createUploadWidget(
             {
                 cloudName: import.meta.env.VITE_REACT_APP_CLOUDINARY_CLOUD_NAME,

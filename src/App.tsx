@@ -12,6 +12,8 @@ import BillboardsPage from "./components/pages/BillboardsPage";
 import BillboardPage from "./components/pages/BillboardPage";
 import CategoriesPage from "./components/pages/CategoriesPage";
 import CategoryPage from "./components/pages/CategoryPage";
+import SizesPage from "./components/pages/SizesPage";
+import SizePage from "./components/pages/SizePage";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
@@ -68,6 +70,8 @@ const App = () => {
                             path="categories/:categoryId"
                             element={<CategoryPage />}
                         />
+                        <Route path="sizes" element={<SizesPage />} />
+                        <Route path="sizes/:sizeId" element={<SizePage />} />
                     </Route>
                 </Route>
             </Routes>

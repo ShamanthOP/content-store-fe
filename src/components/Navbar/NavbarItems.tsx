@@ -30,6 +30,10 @@ const NavbarItems = ({
             label: "Sizes",
         },
         {
+            href: `/${params.storeId}/colors`,
+            label: "Colors",
+        },
+        {
             href: `/${params.storeId}/settings`,
             label: "Settings",
         },

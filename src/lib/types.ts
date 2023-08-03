@@ -33,3 +33,12 @@ export interface Size {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface Color {
+    id: string;
+    name: string;
+    value: string;
+    storeId: string;
+    createdAt: Date;
+    updatedAt: Date;
+}

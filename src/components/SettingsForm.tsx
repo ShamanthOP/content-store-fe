@@ -50,7 +50,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
     const onSubmit = async (data: SettingsFormPayload) => {
         try {
             setIsLoading(true);
-            await customPatch(`/store/${params.storeId!}`, data);
+            await customPatch(`/${params.storeId!}`, data);
             navigate(0);
             toast.success("Store updated");
         } catch (error) {
@@ -64,7 +64,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
     const onDelete = async () => {
         try {
             setIsLoading(true);
-            await customDelete(`/store/${params.storeId!}`);
+            await customDelete(`/${params.storeId!}`);
             navigate("/");
             toast.success("Store deleted");
         } catch (error) {
@@ -138,7 +138,7 @@ const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
                 title="PUBLIC_API_URL"
                 description={`${
                     import.meta.env.VITE_REACT_APP_BACKEND_URL as string
-                }/store/${params.storeId!}`}
+                }/${params.storeId!}`}
                 variant="public"
             />
         </>

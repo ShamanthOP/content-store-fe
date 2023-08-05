@@ -40,7 +40,7 @@ const StoreModal = () => {
     const onSubmit = async (values: FormPayload) => {
         setIsLoading(true);
         try {
-            const newStore = (await customPost("/store", values)) as Store;
+            const newStore = (await customPost("/", values)) as Store;
             window.location.assign(`/${newStore.id}`);
         } catch (error) {
             console.log(error);

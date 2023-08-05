@@ -7,7 +7,7 @@ const useStore = () => {
     const { data, isLoading, error } = useQuery<Store[]>({
         queryKey: ["stores"],
         queryFn: async () => {
-            const stores = (await customGet("/store")) as Store[];
+            const stores = (await customGet("/")) as Store[];
             return stores;
         },
     });

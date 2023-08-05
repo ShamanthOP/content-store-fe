@@ -18,6 +18,7 @@ import ColorsPage from "./components/pages/ColorsPage";
 import ColorPage from "./components/pages/ColorPage";
 import ProductsPage from "./components/pages/ProductsPage";
 import ProductPage from "./components/pages/ProductPage";
+import OrdersPage from "./components/pages/OrdersPage";
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
     throw new Error("Missing Publishable Key");
@@ -83,6 +84,7 @@ const App = () => {
                             path="products/:productId"
                             element={<ProductPage />}
                         />
+                        <Route path="orders" element={<OrdersPage />} />
                     </Route>
                 </Route>
             </Routes>

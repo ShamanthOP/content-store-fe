@@ -68,3 +68,21 @@ export interface Product {
     createdAt: Date;
     updatedAt: Date;
 }
+
+export interface OrderItem {
+    id: string;
+    orderId: string;
+    productId: string;
+    product: Product;
+}
+
+export interface Order {
+    id: string;
+    storeId: string;
+    isPaid: boolean;
+    phone: string;
+    address: string;
+    orderItems: OrderItem[];
+    createdAt: Date;
+    updatedAt: Date;
+}

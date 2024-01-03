@@ -10,7 +10,7 @@ const useProducts = () => {
         queryKey: ["products"],
         queryFn: async () => {
             const products = (await customGet(
-                `/${params.storeId!}/products`
+                `/${params.storeId!}/products?isArchived=true`
             )) as Product[];
             return products;
         },

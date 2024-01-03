@@ -2,6 +2,7 @@ import { UserButton } from "@clerk/clerk-react";
 import useStore from "../../hooks/useStore";
 import NavbarItems from "./NavbarItems";
 import StoreSwitcher from "./StoreSwitcher";
+import { ModeToggle } from "../ui/ModeToggle";
 
 const Navbar = () => {
     const { data: stores } = useStore();
@@ -13,6 +14,7 @@ const Navbar = () => {
                 <NavbarItems className="mx-6" />
 
                 <div className="ml-auto flex items-center space-x-4">
+                    <ModeToggle />
                     <UserButton afterSignOutUrl="/" />
                 </div>
             </div>
